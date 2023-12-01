@@ -14,6 +14,8 @@
 #define IN
 #define OUT
 
+#define PREESM_LOOP_SIZE 300
+
 typedef unsigned char uchar;
 
 /* #include "yuvRead.h" */
