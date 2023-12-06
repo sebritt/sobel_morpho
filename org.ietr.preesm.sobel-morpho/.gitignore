@@ -1,6 +1,6 @@
 /Debug
 /Code/bin
-/Code/generated
+!/Code/generated
 /Code/lib
 /DAG
 /Algo/generated
