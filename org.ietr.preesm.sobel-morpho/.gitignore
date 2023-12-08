@@ -1,7 +1,11 @@
 /Debug
 /Code/bin
+/Code/dat
 !/Code/generated
-/Code/lib
+!/Code/lib
+/Code/lib/*
+!/Code/lib/cmake_modules*
+!/Code/lib/ReadMe.md
 /DAG
 /Algo/generated
 .settings
