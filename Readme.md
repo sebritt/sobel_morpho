@@ -1,10 +1,10 @@
-# TP qualité logiciel - Git
+# TP QLog
 
 *Ce TP sera réalisé sous Linux. Il nécessite l'accès à un compte GitHub.*
 
 L'objectif de ce TP est de manipuler et comprendre quelques fonctionnalités avancées de Git. Pour cela, un projet Git est disponible au lien suivant: [https://github.com/QLOG-5EII/sobel_morpho](https://github.com/QLOG-5EII/sobel_morpho).
 
-Le code contenu dans le dossier `src` applique un filtre de Sobel à une vidéo. Il est accompagné de fichiers CMake qui permettent de le compiler sur Linux ou Windows.
+Le code contenu dans le dossier `src` applique un filtre de Sobel/Dilation/Erosion à une vidéo. Il est accompagné de fichiers CMake qui permettent de le compiler sur Linux ou Windows.
 
 ### Mise en place
 
@@ -58,3 +58,66 @@ L'idée de cette section est de créer un hook qui vérifie que l'ensemble des f
 
 3. Renommez le fichier `.git/hooks/pre-commit.sample` par `.git/hooks/pre-commit` et remplacez son contenu par votre script. Pour empêcher un commit (dans le cas où un ou plusieurs fichiers ne sont pas bien formatés, le script doit renvoyer -1, en utilisant la commande `exit -1`, sinon, pour accepter l'exécution du commit, le script doit renvoyer 0.
 4. Les hooks se trouvent dans le dossier .git et ne sont par conséquent pas versionnés dans le projet sur GitHub. Proposez et implémentez des solutions pour que votre hook soit présent sur l'ensemble des clones de votre projet. Faites une pull request avec votre proposition.
+
+
+
+## GitHub Actions
+
+*Ce TP sera réalisé sous Linux. Il nécessite l'accès à un compte GitHub.*
+
+Réutilisez le [projet git](https://github.com/QLOG-5EII/sobel_morpho) de la fin du TP précédent ou alors faites un nouveau [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
+
+Les workflows Github Actions sont des documents au format `yaml` à mettre dans le répertoire `.github/workflows/` du répo git.
+
+Vous pouvez trouver un rappel de la syntax des workflow dans la [GitHub Actions Cheat Sheet](https://resources.github.com/actions/github-actions-cheat/).
+
+### Workflow Github Actions pour CI dans un environnement Ubuntu.
+
+Voici un exemple de workflow :
+
+```yaml
+name: <workflow name>
+on: 
+  <trigger event>
+
+jobs:
+  <job name>:
+    runs-on: <environment>
+    steps:
+    - name: <step1 name>
+      uses: <action from marketplace>
+      
+    - name: <step2 name>
+      run: |
+        <command1>
+        <command2>
+        <command3>
+```
+
+Mettez en place un premier workflow pour lancer la CI dans un environement Ubuntu pour chaque **push** ainsi que sur un déclenchement manuel, en remplacant les champs de texte indiqués par des `<...>`.
+
+Ce premier workflow doit récupérer les sources de Github, les compiler et exécuter le programme compilé.
+
+Le résultat et les logs d'exécution du workflow sont disponibles dans l'onglet **Actions** de votre répo Github.
+
+## Modification du workflow pour tester sous Windows
+
+Une fois que le workflow Ubuntu fonctionne, étendez la CI pour également lancer la chaine.
+
+Il y a 2 manières d'ajouter un job pour lancer une CI sous Windows :
+ 1. Un job discret.
+ 2. Une matrice de job.
+
+L'utilisation d'un job discret ajouté dans la liste de job permet de définir un comportement spécifique au prix un workflow plus gros et plus verbeux.
+
+A l'inverse, si les opérations à lancer ne sont pas spécifique à un OS, par exemple en utilisant un build manager, alors l'utilisation d'une matrice de job est recommendée.
+
+Mettez en place le choix 1, puis le 2.
+    
+## Ajout de tests unitaires
+
+Maintenant que la chaine de CI fonctionne sur des environnements Linux et Windows, ajoutez des tests unitaires pour valider le bon fonctionnement des fonctions `dilation`, `erosion` et `sobel` de manière à valider le bon fonctionnement de ces fonctions sur des vecteurs d'entrées prédéterminés.
+
+Une fois les tests unitaires écrits et testés, modifier le `CMakeLists.txt` pour générer l'exécutable de test.
+
+Ajoutez un step dans le workflow Github Actions pour que ces tests unitaires fassent parti de la CI.
