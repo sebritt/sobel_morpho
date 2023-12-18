@@ -59,117 +59,117 @@ int exitCallBack(void* userdata, SDL_Event* event){
 void yuvDisplayInit(int id, int width, int height)
 {
 
-	if (display.initialized == 0)
-	{
-		display.currentXMin = 0;
-	}
-
-	if (height > DISPLAY_H)
-	{
-		fprintf(stderr, "SDL screen is not high enough for display %d.\n", id);
-#ifdef _WIN32
-        system("PAUSE");
-#endif
-		exit(1);
-	}
-	else if (id >= NB_DISPLAY)
-	{
-		fprintf(stderr, "The number of displays is limited to %d.\n", NB_DISPLAY);
-#ifdef _WIN32
-        system("PAUSE");
-#endif
-		exit(1);
-	}
-	else if (display.currentXMin + width > DISPLAY_W)
-	{
-		fprintf(stderr, "The number is not wide enough for display %d.\n", NB_DISPLAY);
-#ifdef _WIN32
-		system("PAUSE");
-#endif
-		exit(1);
-	}
-
-
-#ifdef PREESM_VERBOSE
-	printf("SDL screen height OK, width OK, number of displays OK.\n", id);
-#endif
-
-	if (display.initialized == 0)
-	{
-		// Generating window name
-		char* name = "Display";
-		display.initialized = 1;
-
-		printf("SDL_Init_Start\n");
-
-		if (SDL_Init(SDL_INIT_VIDEO))
-		{
-			fprintf(stderr, "Could not initialize SDL - %s\n", SDL_GetError());
-			exit(1);
-		}
-
-		printf("SDL_Init_end\n");
-
-		/* Initialize SDL TTF for text display */
-		if (TTF_Init())
-		{
-			printf("TTF initialization failed: %s\n", TTF_GetError());
-		}
-
-		printf("TTF_Init\n");
-
-		/* Initialize Font for text display */
-		//display.text_font = TTF_OpenFont("./arial.ttf", 20);
-		display.text_font = TTF_OpenFont(PATH_TTF, 20);
-		if (!display.text_font)
-		{
-			printf("TTF_OpenFont: %s\n", TTF_GetError());
-		}
-
-		display.screen = SDL_CreateWindow(name, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-			DISPLAY_W, DISPLAY_H, SDL_WINDOW_SHOWN);
-		if (!display.screen)
-		{
-			fprintf(stderr, "SDL: could not set video mode - exiting\n");
-			exit(1);
-		}
-
-		display.renderer = SDL_CreateRenderer(display.screen, -1, SDL_RENDERER_ACCELERATED);
-		if (!display.renderer)
-		{
-			fprintf(stderr, "SDL: could not create renderer - exiting\n");
-			exit(1);
-		}
-	}
-
-	if (display.textures[id] == NULL)
-	{
-
-		display.textures[id] = SDL_CreateTexture(display.renderer,
-			SDL_PIXELFORMAT_IYUV,
-			SDL_TEXTUREACCESS_STREAMING,
-			width, height);
-
-		if (!display.textures[id])
-		{
-			fprintf(stderr, "SDL: could not create texture - exiting\n");
-			exit(1);
-		}
-
-		display.currentXMin += width;
-	}
-
-	display.stampId = 0;
-	for (int i = 0; i<FPS_MEAN; i++){
-		startTiming(i + 1);
-	}
-
-	printf("register\n");
-	SDL_SetEventFilter(exitCallBack, NULL);
+//	if (display.initialized == 0)
+//	{
+//		display.currentXMin = 0;
+//	}
+//
+//	if (height > DISPLAY_H)
+//	{
+//		fprintf(stderr, "SDL screen is not high enough for display %d.\n", id);
+//#ifdef _WIN32
+//        system("PAUSE");
+//#endif
+//		exit(1);
+//	}
+//	else if (id >= NB_DISPLAY)
+//	{
+//		fprintf(stderr, "The number of displays is limited to %d.\n", NB_DISPLAY);
+//#ifdef _WIN32
+//        system("PAUSE");
+//#endif
+//		exit(1);
+//	}
+//	else if (display.currentXMin + width > DISPLAY_W)
+//	{
+//		fprintf(stderr, "The number is not wide enough for display %d.\n", NB_DISPLAY);
+//#ifdef _WIN32
+//		system("PAUSE");
+//#endif
+//		exit(1);
+//	}
+//
+//
+//#ifdef PREESM_VERBOSE
+//	printf("SDL screen height OK, width OK, number of displays OK.\n", id);
+//#endif
+//
+//	if (display.initialized == 0)
+//	{
+//		// Generating window name
+//		char* name = "Display";
+//		display.initialized = 1;
+//
+//		printf("SDL_Init_Start\n");
+//
+//		if (SDL_Init(SDL_INIT_VIDEO))
+//		{
+//			fprintf(stderr, "Could not initialize SDL - %s\n", SDL_GetError());
+//			exit(1);
+//		}
+//
+//		printf("SDL_Init_end\n");
+//
+//		 Initialize SDL TTF for text display
+//		if (TTF_Init())
+//		{
+//			printf("TTF initialization failed: %s\n", TTF_GetError());
+//		}
+//
+//		printf("TTF_Init\n");
+//
+//		 Initialize Font for text display
+//		//display.text_font = TTF_OpenFont("./arial.ttf", 20);
+//		display.text_font = TTF_OpenFont(PATH_TTF, 20);
+//		if (!display.text_font)
+//		{
+//			printf("TTF_OpenFont: %s\n", TTF_GetError());
+//		}
+//
+//		display.screen = SDL_CreateWindow(name, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+//			DISPLAY_W, DISPLAY_H, SDL_WINDOW_SHOWN);
+//		if (!display.screen)
+//		{
+//			fprintf(stderr, "SDL: could not set video mode - exiting\n");
+//			exit(1);
+//		}
+//
+//		display.renderer = SDL_CreateRenderer(display.screen, -1, SDL_RENDERER_ACCELERATED);
+//		if (!display.renderer)
+//		{
+//			fprintf(stderr, "SDL: could not create renderer - exiting\n");
+//			exit(1);
+//		}
+//	}
+//
+//	if (display.textures[id] == NULL)
+//	{
+//
+//		display.textures[id] = SDL_CreateTexture(display.renderer,
+//			SDL_PIXELFORMAT_IYUV,
+//			SDL_TEXTUREACCESS_STREAMING,
+//			width, height);
+//
+//		if (!display.textures[id])
+//		{
+//			fprintf(stderr, "SDL: could not create texture - exiting\n");
+//			exit(1);
+//		}
+//
+//		display.currentXMin += width;
+//	}
+//
+//	display.stampId = 0;
+//	for (int i = 0; i<FPS_MEAN; i++){
+//		startTiming(i + 1);
+//	}
+//
+//	printf("register\n");
+//	SDL_SetEventFilter(exitCallBack, NULL);
 }
 
 void yuvDisplay(int id, unsigned char *y, unsigned char *u, unsigned char *v){
-	yuvDisplayWithNbSlice(id, -1, y, u, v);
+//	yuvDisplayWithNbSlice(id, -1, y, u, v);
 }
 
 void yuvDisplayWithNbSlice(int id, int nbSlice, unsigned char *y, unsigned char *u, unsigned char *v)
