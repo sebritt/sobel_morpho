@@ -1,0 +1,6 @@
+# Exemple de fichier .clang-format de base
+---
+BasedOnStyle: Google
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
