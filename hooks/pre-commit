@@ -1,0 +1,33 @@
+#!/bin/bash
+#
+# An example hook script to verify what is about to be committed.
+# Called by "git commit" with no arguments.  The hook should
+# exit with non-zero status after issuing an appropriate message if
+# it wants to stop the commit.
+#
+# To enable this hook, rename this file to "pre-commit".
+root=$(git rev-parse --show-toplevel)
+cd "$root"
+echo "root of the git project: $root"
+list=$(git diff --name-only --cached)
+while IFS= read -r line; do
+	echo "Formatage de $line"
+    # Appliquer clang-format et sauvegarder dans un fichier temporaire
+    # Vérifier si le fichier a l'extension .c
+    if [[ "$line" == *.c ]]; then
+        # En cas de noms de fichiers avec espaces, assurez-vous de les entourer de guillemets
+        echo "Formatage de $line"
+
+        # Appliquer clang-format et sauvegarder dans un fichier temporaire
+        if clang-format "$line" > "$line.tmp"; then
+            mv "$line.tmp" "$line"  # Remplacer le fichier original avec la version formatée
+            git add "$line"  # Ajouter le fichier formaté à l'index pour le commit
+        else
+            echo "Erreur lors du formatage de $line"
+            exit 1
+        fi
+    else
+        echo "Fichier $line ignoré (non .c)"
+    fi
+done <<< "$list"
+exit 0
