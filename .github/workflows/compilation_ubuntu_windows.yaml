@@ -22,14 +22,19 @@ jobs:
   test_compilation_windows:
     runs-on: windows-latest
     steps:
-      - name: Compilation_Windows
+      - uses: actions/checkout@v4
+
+      - name: Setup Dependencies
+        run: |
+          choco install cmake --installargs '"ADD_CMAKE_TO_PATH=System"'
+
+      - name: Build Project
         run: |
           git clone https://github.com/sebritt/sobel_morpho.git
           cd sobel_morpho
-          choco install cmake --installargs '"ADD_CMAKE_TO_PATH=System"'
           cmake .
           cmake --build . --config Release
-          Start-Process -NoNewWindow -FilePath ./Release/sobel -ArgumentList "" -Wait -Timeout 20
+
       - name: Run Program with Timeout
         run: |
           # Start the program as a background job
@@ -37,5 +42,5 @@ jobs:
           # Wait for 20 seconds
           Start-Sleep -Seconds 20
           # Kill the process after 20 seconds
-          $process.Kill()
+          $process | Stop-Process -Force
 
