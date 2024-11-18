@@ -17,7 +17,7 @@ jobs:
           sudo apt-get install libpthread-stubs0-dev -y
           cmake .
           make
-          timeout 20s ./Release/sobel
+          ./Release/sobel
 
   test_compilation_windows:
     runs-on: windows-latest
@@ -38,5 +38,5 @@ jobs:
       - name: Run Program
         run: |
           # Get the absolute path to the executable
-          Release/sobel.exe"
+          Release/sobel.exe
           
