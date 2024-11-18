@@ -26,4 +26,4 @@ jobs:
           sudo apt-get install libpthread-stubs0-dev -y
           cmake .
           make
-          ./Release/sobel
+          timeout 20s ./Release/sobel
