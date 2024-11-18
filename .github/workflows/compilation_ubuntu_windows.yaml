@@ -27,10 +27,12 @@ jobs:
       - name: Build Project
         run: |
           dir
-          cmake .
-
+          cmake -G "MinGw Makefiles" .
+          mingw32-make
+          dir
       - name: Run Program
         run: |
           # Get the absolute path to the executable
           tree
+          Release/sobel.exe
           
