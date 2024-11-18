@@ -33,10 +33,7 @@ jobs:
         run: |
           git clone https://github.com/sebritt/sobel_morpho.git
           cd sobel_morpho
-          cmake .
-          dir
-          tree
-          mingw32-make 
+          CMakeVS2013.bat
 
       - name: Run Program
         run: |
