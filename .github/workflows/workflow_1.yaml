@@ -3,9 +3,10 @@ on:
   push
 
 jobs:
-  <job name>: test_compilation_ubuntu
+  test_compilation_ubuntu:
     runs-on: ubuntu-latest
     steps:
-    - name: Test_echo
-      run: |
-        echo "Hello World"
+      - name: Test_echo
+        run: |
+          echo "Hello World"
+
