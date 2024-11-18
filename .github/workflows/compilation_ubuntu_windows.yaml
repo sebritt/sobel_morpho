@@ -27,7 +27,7 @@ jobs:
       - name: Build Project
         run: |
           dir
-          cmake -G "MinGw Makefiles" .
+          cmake -G "MinGW Makefiles" .
           mingw32-make
           dir
       - name: Run Program
