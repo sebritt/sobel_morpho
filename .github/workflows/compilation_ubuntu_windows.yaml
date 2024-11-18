@@ -27,13 +27,14 @@ jobs:
       - name: Setup Dependencies
         run: |
           choco install cmake --installargs '"ADD_CMAKE_TO_PATH=System"'
+          choco install mingw -y
 
       - name: Build Project
         run: |
           git clone https://github.com/sebritt/sobel_morpho.git
           cd sobel_morpho
           cmake .
-          cmake --build . --config Release
+          mingw32-make 
 
       - name: Run Program
         run: |
