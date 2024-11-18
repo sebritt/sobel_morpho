@@ -32,5 +32,5 @@ jobs:
       - name: Run Program
         run: |
           # Get the absolute path to the executable
-          Release/sobel.exe
+          tree
           
