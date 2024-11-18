@@ -1,4 +1,4 @@
-name: workflow_1
+name: compilation
 on: 
   push
 
@@ -6,12 +6,12 @@ jobs:
   test_compilation_ubuntu:
     runs-on: ubuntu-latest
     steps:
-      - name: Test_echo
+      - name: Compilation_Ubuntu
         run: |
           git clone https://github.com/sebritt/sobel_morpho.git
           cd sobel_morpho
           ls
+          sudo apt-get update
           sudo apt-get install cmake -y
-          cmake CMakeLists.txt
-          
-		
+          cmake .
+
