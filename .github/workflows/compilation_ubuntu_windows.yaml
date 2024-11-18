@@ -27,7 +27,7 @@ jobs:
       - name: Build Project
         run: |
           dir
-          CMakeVS2013.bat
+          cmake .
 
       - name: Run Program
         run: |
