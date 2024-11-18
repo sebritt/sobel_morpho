@@ -30,4 +30,12 @@ jobs:
           cmake .
           cmake --build . --config Release
           Start-Process -NoNewWindow -FilePath ./Release/sobel -ArgumentList "" -Wait -Timeout 20
+      - name: Run Program with Timeout
+        run: |
+          # Start the program as a background job
+          $process = Start-Process -NoNewWindow -FilePath ./Release/sobel -ArgumentList "" -PassThru
+          # Wait for 20 seconds
+          Start-Sleep -Seconds 20
+          # Kill the process after 20 seconds
+          $process.Kill()
 
