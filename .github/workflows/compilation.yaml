@@ -6,15 +6,6 @@ jobs:
   test_compilation_ubuntu:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Cache dat Directory
-        id: cache-dat
-        uses: actions/cache@v4
-        with:
-          path: sobel_morpho/dat
-          key: ${{ runner.os }}-dat-${{ hashFiles('sobel_morpho/dat/**') }}
-
       - name: Compilation_Ubuntu
         run: |
           git clone https://github.com/sebritt/sobel_morpho.git
