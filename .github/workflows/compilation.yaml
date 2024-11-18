@@ -1,0 +1,14 @@
+name: workflow_1
+on: 
+  push
+
+jobs:
+  test_compilation_ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test_echo
+        run: |
+          git clone https://github.com/sebritt/sobel_morpho.git
+          cd sobel_morpho
+          ls
+
