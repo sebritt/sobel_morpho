@@ -35,12 +35,11 @@ jobs:
           cmake .
           cmake --build . --config Release
 
-      - name: Run Program with Timeout
+      - name: Run Program
         run: |
-          # Start the program as a background job
-          $process = Start-Process -NoNewWindow -FilePath ./Release/sobel -ArgumentList "" -PassThru
-          # Wait for 20 seconds
-          Start-Sleep -Seconds 20
-          # Kill the process after 20 seconds
-          $process | Stop-Process -Force
+          # Get the absolute path to the executable
+          $exePath = "$(Build.SourcesDirectory)\sobel_morpho\Release\sobel.exe"
+          
+          # Start the program
+          Start-Process -FilePath $exePath -NoNewWindow
 
