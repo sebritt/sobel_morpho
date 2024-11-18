@@ -24,13 +24,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Dependencies
-        run: |
-          choco install cmake --installargs '"ADD_CMAKE_TO_PATH=System"'
-          choco install mingw -y
-
       - name: Build Project
         run: |
+          dir
           CMakeVS2013.bat
 
       - name: Run Program
