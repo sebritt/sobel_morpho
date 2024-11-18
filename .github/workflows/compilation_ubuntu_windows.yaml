@@ -1,6 +1,6 @@
 name: compilation
 on: 
-  []
+  push
 
 jobs:
   test_compilation_ubuntu:
@@ -18,3 +18,16 @@ jobs:
           cmake .
           make
           timeout 20s ./Release/sobel
+
+  test_compilation_windows:
+    runs-on: windows-latest
+    steps:
+      - name: Compilation_Windows
+        run: |
+          git clone https://github.com/sebritt/sobel_morpho.git
+          cd sobel_morpho
+          choco install cmake --installargs '"ADD_CMAKE_TO_PATH=System"'
+          cmake .
+          cmake --build . --config Release
+          Start-Process -NoNewWindow -FilePath ./Release/sobel -ArgumentList "" -Wait -Timeout 20
+
