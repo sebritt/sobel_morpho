@@ -38,7 +38,7 @@ jobs:
       - name: Run Program
         run: |
           # Get the absolute path to the executable
-          $exePath = "$(Build.SourcesDirectory)\sobel_morpho\Release\sobel.exe"
+          $exePath = "D:\a\sobel_morpho\sobel_morpho\sobel_morpho\Release\sobel.exe"
           
           # Start the program
           Start-Process -FilePath $exePath -NoNewWindow
