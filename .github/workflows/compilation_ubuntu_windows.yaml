@@ -34,6 +34,8 @@ jobs:
           git clone https://github.com/sebritt/sobel_morpho.git
           cd sobel_morpho
           cmake .
+          dir
+          tree
           mingw32-make 
 
       - name: Run Program
